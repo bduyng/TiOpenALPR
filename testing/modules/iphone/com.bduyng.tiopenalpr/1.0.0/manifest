@@ -1,0 +1,19 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 2
+architectures: armv7 arm64 i386
+mac: false
+description: TiOpenALPR
+author: Your Name
+license: Specify your license
+copyright: Copyright (c) 2020 by Your Company
+
+# these should not be edited
+name: TiOpenALPR
+moduleid: com.bduyng.tiopenalpr
+guid: 2007da16-2381-44d4-953a-573e051f797e
+platform: iphone
+minsdk: 9.2.0.GA

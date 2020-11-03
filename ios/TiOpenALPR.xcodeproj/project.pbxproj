@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		24416B8111C4CA220047AFDD /* Build & Test */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 24416B8A11C4CA520047AFDD /* Build configuration list for PBXAggregateTarget "Build & Test" */;
+			buildPhases = (
+				24416B8011C4CA220047AFDD /* ShellScript */,
+				E139CFFE2518A43B0043F977 /* CopyFiles */,
+			);
+			dependencies = (
+				24416B8511C4CA280047AFDD /* PBXTargetDependency */,
+			);
+			name = "Build & Test";
+			productName = "Build & test";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		24DD6CF91134B3F500162E58 /* ComBduyngTiopenalprModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* ComBduyngTiopenalprModule.h */; };
+		24DD6CFA1134B3F500162E58 /* ComBduyngTiopenalprModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* ComBduyngTiopenalprModule.m */; };
+		24DE9E1111C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.h */; };
+		24DE9E1211C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.m */; };
+		AA747D9F0F9514B9006C5449 /* ComBduyngTiopenalpr_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* ComBduyngTiopenalpr_Prefix.pch */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		E139CFCE251892EE0043F977 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E139CFCA251892ED0043F977 /* opencv2.framework */; };
+		E139CFCF251892EE0043F977 /* tesseract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E139CFCB251892EE0043F977 /* tesseract.framework */; };
+		E139CFD0251892EE0043F977 /* openalpr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E139CFCC251892EE0043F977 /* openalpr.framework */; };
+		E139CFD1251892EE0043F977 /* leptonica.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E139CFCD251892EE0043F977 /* leptonica.framework */; };
+		E139CFF62518998B0043F977 /* CameraTouchFocusView.h in Headers */ = {isa = PBXBuildFile; fileRef = E139CFEE2518998B0043F977 /* CameraTouchFocusView.h */; };
+		E139CFF72518998B0043F977 /* PlateScanner.mm in Sources */ = {isa = PBXBuildFile; fileRef = E139CFEF2518998B0043F977 /* PlateScanner.mm */; };
+		E139CFF82518998B0043F977 /* RecognizedPlateBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E139CFF02518998B0043F977 /* RecognizedPlateBorderView.m */; };
+		E139CFF92518998B0043F977 /* RecognizedPlateBorderView.h in Headers */ = {isa = PBXBuildFile; fileRef = E139CFF12518998B0043F977 /* RecognizedPlateBorderView.h */; };
+		E139CFFA2518998B0043F977 /* PlateScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = E139CFF22518998B0043F977 /* PlateScanner.h */; };
+		E139CFFB2518998B0043F977 /* PlateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E139CFF32518998B0043F977 /* PlateResult.m */; };
+		E139CFFC2518998B0043F977 /* CameraTouchFocusView.m in Sources */ = {isa = PBXBuildFile; fileRef = E139CFF42518998B0043F977 /* CameraTouchFocusView.m */; };
+		E139CFFD2518998B0043F977 /* PlateResult.h in Headers */ = {isa = PBXBuildFile; fileRef = E139CFF52518998B0043F977 /* PlateResult.h */; };
+		E139D0002518A4790043F977 /* openalpr.conf in CopyFiles */ = {isa = PBXBuildFile; fileRef = E139CFFF2518A4790043F977 /* openalpr.conf */; };
+		E139D0022518A49A0043F977 /* runtime_data in CopyFiles */ = {isa = PBXBuildFile; fileRef = E139D0012518A49A0043F977 /* runtime_data */; };
+		E139D00D2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = E139D00B2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.h */; };
+		E139D00E2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D00C2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.m */; };
+		E139D0112518A7770043F977 /* ComBduyngTiopenalprALPRCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = E139D00F2518A7770043F977 /* ComBduyngTiopenalprALPRCamera.h */; };
+		E139D0122518A7770043F977 /* ComBduyngTiopenalprALPRCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = E139D0102518A7770043F977 /* ComBduyngTiopenalprALPRCamera.mm */; };
+		E139D0152518B3FF0043F977 /* ALPRCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D0132518B3FF0043F977 /* ALPRCamera.m */; };
+		E139D0162518B3FF0043F977 /* ALPRCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = E139D0142518B3FF0043F977 /* ALPRCamera.h */; };
+		E139D0182518BFD70043F977 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E139D0172518BFD70043F977 /* AssetsLibrary.framework */; };
+		E139D01A2518BFF20043F977 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E139D0192518BFF20043F977 /* CoreMedia.framework */; };
+		E139D01C2518C0A80043F977 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E139D01B2518C0A80043F977 /* AVFoundation.framework */; };
+		E139D01F25190C6C0043F977 /* openalpr.conf in Resources */ = {isa = PBXBuildFile; fileRef = E139CFFF2518A4790043F977 /* openalpr.conf */; };
+		E139D02025190C710043F977 /* runtime_data in Resources */ = {isa = PBXBuildFile; fileRef = E139D0012518A49A0043F977 /* runtime_data */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		24416B8411C4CA280047AFDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = TiOpenALPR;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E139CFFE2518A43B0043F977 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				E139D0022518A49A0043F977 /* runtime_data in CopyFiles */,
+				E139D0002518A4790043F977 /* openalpr.conf in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		24DD6CF71134B3F500162E58 /* ComBduyngTiopenalprModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComBduyngTiopenalprModule.h; path = Classes/ComBduyngTiopenalprModule.h; sourceTree = "<group>"; };
+		24DD6CF81134B3F500162E58 /* ComBduyngTiopenalprModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComBduyngTiopenalprModule.m; path = Classes/ComBduyngTiopenalprModule.m; sourceTree = "<group>"; };
+		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
+		24DE9E0F11C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComBduyngTiopenalprModuleAssets.h; path = Classes/ComBduyngTiopenalprModuleAssets.h; sourceTree = "<group>"; };
+		24DE9E1011C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComBduyngTiopenalprModuleAssets.m; path = Classes/ComBduyngTiopenalprModuleAssets.m; sourceTree = "<group>"; };
+		AA747D9E0F9514B9006C5449 /* ComBduyngTiopenalpr_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComBduyngTiopenalpr_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libcom.bduyng.tiopenalpr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcom.bduyng.tiopenalpr.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E139CFCA251892ED0043F977 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = platform/opencv2.framework; sourceTree = "<group>"; };
+		E139CFCB251892EE0043F977 /* tesseract.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = tesseract.framework; path = platform/tesseract.framework; sourceTree = "<group>"; };
+		E139CFCC251892EE0043F977 /* openalpr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openalpr.framework; path = platform/openalpr.framework; sourceTree = "<group>"; };
+		E139CFCD251892EE0043F977 /* leptonica.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = leptonica.framework; path = platform/leptonica.framework; sourceTree = "<group>"; };
+		E139CFEE2518998B0043F977 /* CameraTouchFocusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraTouchFocusView.h; path = Classes/CameraTouchFocusView.h; sourceTree = "<group>"; };
+		E139CFEF2518998B0043F977 /* PlateScanner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlateScanner.mm; path = Classes/PlateScanner.mm; sourceTree = "<group>"; };
+		E139CFF02518998B0043F977 /* RecognizedPlateBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecognizedPlateBorderView.m; path = Classes/RecognizedPlateBorderView.m; sourceTree = "<group>"; };
+		E139CFF12518998B0043F977 /* RecognizedPlateBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RecognizedPlateBorderView.h; path = Classes/RecognizedPlateBorderView.h; sourceTree = "<group>"; };
+		E139CFF22518998B0043F977 /* PlateScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlateScanner.h; path = Classes/PlateScanner.h; sourceTree = "<group>"; };
+		E139CFF32518998B0043F977 /* PlateResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlateResult.m; path = Classes/PlateResult.m; sourceTree = "<group>"; };
+		E139CFF42518998B0043F977 /* CameraTouchFocusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraTouchFocusView.m; path = Classes/CameraTouchFocusView.m; sourceTree = "<group>"; };
+		E139CFF52518998B0043F977 /* PlateResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlateResult.h; path = Classes/PlateResult.h; sourceTree = "<group>"; };
+		E139CFFF2518A4790043F977 /* openalpr.conf */ = {isa = PBXFileReference; lastKnownFileType = text; name = openalpr.conf; path = platform/openalpr.framework/openalpr.conf; sourceTree = "<group>"; };
+		E139D0012518A49A0043F977 /* runtime_data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = runtime_data; path = platform/openalpr.framework/runtime_data; sourceTree = "<group>"; };
+		E139D00B2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ComBduyngTiopenalprALPRCameraProxy.h; path = Classes/ComBduyngTiopenalprALPRCameraProxy.h; sourceTree = "<group>"; };
+		E139D00C2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ComBduyngTiopenalprALPRCameraProxy.m; path = Classes/ComBduyngTiopenalprALPRCameraProxy.m; sourceTree = "<group>"; };
+		E139D00F2518A7770043F977 /* ComBduyngTiopenalprALPRCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ComBduyngTiopenalprALPRCamera.h; path = Classes/ComBduyngTiopenalprALPRCamera.h; sourceTree = "<group>"; };
+		E139D0102518A7770043F977 /* ComBduyngTiopenalprALPRCamera.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = ComBduyngTiopenalprALPRCamera.mm; path = Classes/ComBduyngTiopenalprALPRCamera.mm; sourceTree = "<group>"; };
+		E139D0132518B3FF0043F977 /* ALPRCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALPRCamera.m; path = Classes/ALPRCamera.m; sourceTree = "<group>"; };
+		E139D0142518B3FF0043F977 /* ALPRCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALPRCamera.h; path = Classes/ALPRCamera.h; sourceTree = "<group>"; };
+		E139D0172518BFD70043F977 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		E139D0192518BFF20043F977 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		E139D01B2518C0A80043F977 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E139D01C2518C0A80043F977 /* AVFoundation.framework in Frameworks */,
+				E139D01A2518BFF20043F977 /* CoreMedia.framework in Frameworks */,
+				E139D0182518BFD70043F977 /* AssetsLibrary.framework in Frameworks */,
+				E139CFD1251892EE0043F977 /* leptonica.framework in Frameworks */,
+				E139CFCE251892EE0043F977 /* opencv2.framework in Frameworks */,
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				E139CFCF251892EE0043F977 /* tesseract.framework in Frameworks */,
+				E139CFD0251892EE0043F977 /* openalpr.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libcom.bduyng.tiopenalpr.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* TiOpenALPR */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = TiOpenALPR;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E139D01B2518C0A80043F977 /* AVFoundation.framework */,
+				E139D0192518BFF20043F977 /* CoreMedia.framework */,
+				E139D0172518BFD70043F977 /* AssetsLibrary.framework */,
+				E139CFCD251892EE0043F977 /* leptonica.framework */,
+				E139CFCC251892EE0043F977 /* openalpr.framework */,
+				E139CFCA251892ED0043F977 /* opencv2.framework */,
+				E139CFCB251892EE0043F977 /* tesseract.framework */,
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E139D0142518B3FF0043F977 /* ALPRCamera.h */,
+				E139D0132518B3FF0043F977 /* ALPRCamera.m */,
+				E139CFEE2518998B0043F977 /* CameraTouchFocusView.h */,
+				E139CFF42518998B0043F977 /* CameraTouchFocusView.m */,
+				E139CFF52518998B0043F977 /* PlateResult.h */,
+				E139CFF32518998B0043F977 /* PlateResult.m */,
+				E139CFF22518998B0043F977 /* PlateScanner.h */,
+				E139CFEF2518998B0043F977 /* PlateScanner.mm */,
+				E139CFF12518998B0043F977 /* RecognizedPlateBorderView.h */,
+				E139CFF02518998B0043F977 /* RecognizedPlateBorderView.m */,
+				24DE9E0F11C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.h */,
+				24DE9E1011C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.m */,
+				24DD6CF71134B3F500162E58 /* ComBduyngTiopenalprModule.h */,
+				24DD6CF81134B3F500162E58 /* ComBduyngTiopenalprModule.m */,
+				E139D00F2518A7770043F977 /* ComBduyngTiopenalprALPRCamera.h */,
+				E139D0102518A7770043F977 /* ComBduyngTiopenalprALPRCamera.mm */,
+				E139D00B2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.h */,
+				E139D00C2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E139D0012518A49A0043F977 /* runtime_data */,
+				E139CFFF2518A4790043F977 /* openalpr.conf */,
+				AA747D9E0F9514B9006C5449 /* ComBduyngTiopenalpr_Prefix.pch */,
+				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA747D9F0F9514B9006C5449 /* ComBduyngTiopenalpr_Prefix.pch in Headers */,
+				24DD6CF91134B3F500162E58 /* ComBduyngTiopenalprModule.h in Headers */,
+				E139D0162518B3FF0043F977 /* ALPRCamera.h in Headers */,
+				24DE9E1111C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.h in Headers */,
+				E139D00D2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.h in Headers */,
+				E139CFFD2518998B0043F977 /* PlateResult.h in Headers */,
+				E139CFF62518998B0043F977 /* CameraTouchFocusView.h in Headers */,
+				E139CFFA2518998B0043F977 /* PlateScanner.h in Headers */,
+				E139D0112518A7770043F977 /* ComBduyngTiopenalprALPRCamera.h in Headers */,
+				E139CFF92518998B0043F977 /* RecognizedPlateBorderView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* TiOpenALPR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TiOpenALPR" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+				E139D01E25190C580043F977 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TiOpenALPR;
+			productName = TiOpenALPR;
+			productReference = D2AAC07E0554694100DB518D /* libcom.bduyng.tiopenalpr.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+			};
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TiOpenALPR" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* TiOpenALPR */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* TiOpenALPR */,
+				24416B8111C4CA220047AFDD /* Build & Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E139D01E25190C580043F977 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E139D02025190C710043F977 /* runtime_data in Resources */,
+				E139D01F25190C6C0043F977 /* openalpr.conf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		24416B8011C4CA220047AFDD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here\n\n/Users/bduyng/.nvm/versions/node/v10.20.1/bin/ti build --project-dir \"${PROJECT_DIR}\" -p ios -T device\nexit $?\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E139CFFC2518998B0043F977 /* CameraTouchFocusView.m in Sources */,
+				E139CFF72518998B0043F977 /* PlateScanner.mm in Sources */,
+				E139CFFB2518998B0043F977 /* PlateResult.m in Sources */,
+				E139CFF82518998B0043F977 /* RecognizedPlateBorderView.m in Sources */,
+				E139D0152518B3FF0043F977 /* ALPRCamera.m in Sources */,
+				24DD6CFA1134B3F500162E58 /* ComBduyngTiopenalprModule.m in Sources */,
+				24DE9E1211C5FE74003F90F6 /* ComBduyngTiopenalprModuleAssets.m in Sources */,
+				E139D0122518A7770043F977 /* ComBduyngTiopenalprALPRCamera.mm in Sources */,
+				E139D00E2518A7640043F977 /* ComBduyngTiopenalprALPRCameraProxy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		24416B8511C4CA280047AFDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC07D0554694100DB518D /* TiOpenALPR */;
+			targetProxy = 24416B8411C4CA280047AFDD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DSTROOT = /tmp/ComBduyngTiopenalpr.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/platform",
+				);
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ComBduyngTiopenalpr_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-DDEBUG",
+					"-DTI_POST_1_2",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = com.bduyng.tiopenalpr;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /tmp/ComBduyngTiopenalpr.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/platform",
+				);
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ComBduyngTiopenalpr_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"TI_VERSION=$(TI_VERSION)",
+					NDEBUG,
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DTI_POST_1_2";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = com.bduyng.tiopenalpr;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DSTROOT = /tmp/ComBduyngTiopenalpr.dst;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ComBduyngTiopenalpr_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-DDEBUG",
+					"-DTI_POST_1_2",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = com.bduyng.tiopenalpr;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DSTROOT = /tmp/ComBduyngTiopenalpr.dst;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ComBduyngTiopenalpr_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_CFLAGS = "-DTI_POST_1_2";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = com.bduyng.tiopenalpr;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+		24416B8211C4CA220047AFDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Build & test";
+			};
+			name = Debug;
+		};
+		24416B8311C4CA220047AFDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Build & test";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TiOpenALPR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TiOpenALPR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24416B8A11C4CA520047AFDD /* Build configuration list for PBXAggregateTarget "Build & Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24416B8211C4CA220047AFDD /* Debug */,
+				24416B8311C4CA220047AFDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
