@@ -44,23 +44,24 @@ API_AVAILABLE(ios(10.0))
 
 - (ALPRCamera *)camera
 {
-  if (_camera == nil) {
-      self.session = [AVCaptureSession new];
-    // Create view
-    _camera = [[ALPRCamera alloc] initWithManager:self];
+    if (_camera == nil) {
+        self.session = [AVCaptureSession new];
+        // Create view
+        _camera = [[ALPRCamera alloc] initWithManager:self];
 #if !(TARGET_IPHONE_SIMULATOR)
-  self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
-  self.previewLayer.needsDisplayOnBoundsChange = YES;
-  [_camera addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchToZoom:)]];
+        self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
+        self.previewLayer.needsDisplayOnBoundsChange = YES;
+        self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        [_camera addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchToZoom:)]];
 #endif
-    _camera.frame = self.bounds;
-    [_camera layoutSubviews];
+        _camera.frame = self.bounds;
+        [_camera layoutSubviews];
+        
+        // Add to super-view
+        [self addSubview:_camera];
+    }
     
-      // Add to super-view
-    [self addSubview:_camera];
-  }
-
-  return _camera;
+    return _camera;
 }
 
 
@@ -69,111 +70,111 @@ API_AVAILABLE(ios(10.0))
     return;
 #endif
     TiThreadPerformOnMainThread(
-    ^() {
-      if (self.presetCamera == AVCaptureDevicePositionUnspecified) {
-          self.presetCamera = AVCaptureDevicePositionBack;
-      }
-      
-      AVCaptureVideoDataOutput *videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
-      
-      // The algorithm is going to convert to grayscale anyways, so let's use a format that makes it
-      // easy to extract
-      NSDictionary *videoOutputSettings = @{
-          (NSString*)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)
-      };
-      [videoDataOutput setVideoSettings:videoOutputSettings];
-      videoDataOutput.alwaysDiscardsLateVideoFrames = YES;
-      self->videoDataOutputQueue = dispatch_queue_create("OpenALPR-video-queue", NULL);
-      [videoDataOutput setSampleBufferDelegate:self queue:self->videoDataOutputQueue];
-      
-      
-      if ([self.session canAddOutput:videoDataOutput]) {
-          [self.session addOutput:videoDataOutput];
-      }
-      
-      if (@available(iOS 10.0, *)) {
-          self.avCaptureOutput = [[AVCapturePhotoOutput alloc] init];
-      } else {
-          // Fallback on earlier versions
-      }
-      if([self.session canAddOutput:self.avCaptureOutput]) {
-          [self.session addOutput:self.avCaptureOutput];
-      }
-      
-      __weak ComBduyngTiopenalprALPRCamera *weakSelf = self;
-      [self setRuntimeErrorHandlingObserver:[NSNotificationCenter.defaultCenter addObserverForName:AVCaptureSessionRuntimeErrorNotification object:self.session queue:nil usingBlock:^(NSNotification *note) {
-          ComBduyngTiopenalprALPRCamera *strongSelf = weakSelf;
-          TiThreadPerformOnMainThread(
-          ^() {
-            // Manually restarting the session since it must have been stopped due to an error.
-            [strongSelf.session startRunning];
-          },
-          NO);
-//          dispatch_async(strongSelf.sessionQueue, ^{
-//              // Manually restarting the session since it must have been stopped due to an error.
-//              [strongSelf.session startRunning];
-//          });
-      }]];
-      
-      [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-          [self.session startRunning];
-      }];
-      
-      [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceDidRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
-      self->deviceOrientation = [[UIDevice currentDevice] orientation];
-      [self updatePreviewLayerOrientation];
+                                ^() {
+        if (self.presetCamera == AVCaptureDevicePositionUnspecified) {
+            self.presetCamera = AVCaptureDevicePositionBack;
+        }
+        
+        AVCaptureVideoDataOutput *videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
+        
+        // The algorithm is going to convert to grayscale anyways, so let's use a format that makes it
+        // easy to extract
+        NSDictionary *videoOutputSettings = @{
+            (NSString*)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)
+        };
+        [videoDataOutput setVideoSettings:videoOutputSettings];
+        videoDataOutput.alwaysDiscardsLateVideoFrames = YES;
+        self->videoDataOutputQueue = dispatch_queue_create("OpenALPR-video-queue", NULL);
+        [videoDataOutput setSampleBufferDelegate:self queue:self->videoDataOutputQueue];
+        
+        
+        if ([self.session canAddOutput:videoDataOutput]) {
+            [self.session addOutput:videoDataOutput];
+        }
+        
+        if (@available(iOS 10.0, *)) {
+            self.avCaptureOutput = [[AVCapturePhotoOutput alloc] init];
+        } else {
+            // Fallback on earlier versions
+        }
+        if([self.session canAddOutput:self.avCaptureOutput]) {
+            [self.session addOutput:self.avCaptureOutput];
+        }
+        
+        __weak ComBduyngTiopenalprALPRCamera *weakSelf = self;
+        [self setRuntimeErrorHandlingObserver:[NSNotificationCenter.defaultCenter addObserverForName:AVCaptureSessionRuntimeErrorNotification object:self.session queue:nil usingBlock:^(NSNotification *note) {
+            ComBduyngTiopenalprALPRCamera *strongSelf = weakSelf;
+            TiThreadPerformOnMainThread(
+                                        ^() {
+                // Manually restarting the session since it must have been stopped due to an error.
+                [strongSelf.session startRunning];
+            },
+                                        NO);
+            //          dispatch_async(strongSelf.sessionQueue, ^{
+            //              // Manually restarting the session since it must have been stopped due to an error.
+            //              [strongSelf.session startRunning];
+            //          });
+        }]];
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+            [self.session startRunning];
+        }];
+        
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceDidRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
+        self->deviceOrientation = [[UIDevice currentDevice] orientation];
+        [self updatePreviewLayerOrientation];
     },
-    NO);
-//    dispatch_async(self.sessionQueue, ^{
-//        if (self.presetCamera == AVCaptureDevicePositionUnspecified) {
-//            self.presetCamera = AVCaptureDevicePositionBack;
-//        }
-//
-//        AVCaptureVideoDataOutput *videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
-//
-//        // The algorithm is going to convert to grayscale anyways, so let's use a format that makes it
-//        // easy to extract
-//        NSDictionary *videoOutputSettings = @{
-//            (NSString*)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)
-//        };
-//        [videoDataOutput setVideoSettings:videoOutputSettings];
-//        videoDataOutput.alwaysDiscardsLateVideoFrames = YES;
-//        self->videoDataOutputQueue = dispatch_queue_create("OpenALPR-video-queue", NULL);
-//        [videoDataOutput setSampleBufferDelegate:self queue:self->videoDataOutputQueue];
-//
-//
-//        if ([self.session canAddOutput:videoDataOutput]) {
-//            [self.session addOutput:videoDataOutput];
-//        }
-//
-//        if (@available(iOS 10.0, *)) {
-//            self.avCaptureOutput = [[AVCapturePhotoOutput alloc] init];
-//        } else {
-//            // Fallback on earlier versions
-//        }
-//        if([self.session canAddOutput:self.avCaptureOutput]) {
-//            [self.session addOutput:self.avCaptureOutput];
-//        }
-//
-//        __weak ComBduyngTiopenalprALPRCamera *weakSelf = self;
-//        [self setRuntimeErrorHandlingObserver:[NSNotificationCenter.defaultCenter addObserverForName:AVCaptureSessionRuntimeErrorNotification object:self.session queue:nil usingBlock:^(NSNotification *note) {
-//            ComBduyngTiopenalprALPRCamera *strongSelf = weakSelf;
-//            dispatch_async(strongSelf.sessionQueue, ^{
-//                // Manually restarting the session since it must have been stopped due to an error.
-//                [strongSelf.session startRunning];
-//            });
-//        }]];
-//
-//        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-//            [self.session startRunning];
-//        }];
-//
-//        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceDidRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
-//        self->deviceOrientation = [[UIDevice currentDevice] orientation];
-//        [self updatePreviewLayerOrientation];
-//    });
+                                NO);
+    //    dispatch_async(self.sessionQueue, ^{
+    //        if (self.presetCamera == AVCaptureDevicePositionUnspecified) {
+    //            self.presetCamera = AVCaptureDevicePositionBack;
+    //        }
+    //
+    //        AVCaptureVideoDataOutput *videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
+    //
+    //        // The algorithm is going to convert to grayscale anyways, so let's use a format that makes it
+    //        // easy to extract
+    //        NSDictionary *videoOutputSettings = @{
+    //            (NSString*)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)
+    //        };
+    //        [videoDataOutput setVideoSettings:videoOutputSettings];
+    //        videoDataOutput.alwaysDiscardsLateVideoFrames = YES;
+    //        self->videoDataOutputQueue = dispatch_queue_create("OpenALPR-video-queue", NULL);
+    //        [videoDataOutput setSampleBufferDelegate:self queue:self->videoDataOutputQueue];
+    //
+    //
+    //        if ([self.session canAddOutput:videoDataOutput]) {
+    //            [self.session addOutput:videoDataOutput];
+    //        }
+    //
+    //        if (@available(iOS 10.0, *)) {
+    //            self.avCaptureOutput = [[AVCapturePhotoOutput alloc] init];
+    //        } else {
+    //            // Fallback on earlier versions
+    //        }
+    //        if([self.session canAddOutput:self.avCaptureOutput]) {
+    //            [self.session addOutput:self.avCaptureOutput];
+    //        }
+    //
+    //        __weak ComBduyngTiopenalprALPRCamera *weakSelf = self;
+    //        [self setRuntimeErrorHandlingObserver:[NSNotificationCenter.defaultCenter addObserverForName:AVCaptureSessionRuntimeErrorNotification object:self.session queue:nil usingBlock:^(NSNotification *note) {
+    //            ComBduyngTiopenalprALPRCamera *strongSelf = weakSelf;
+    //            dispatch_async(strongSelf.sessionQueue, ^{
+    //                // Manually restarting the session since it must have been stopped due to an error.
+    //                [strongSelf.session startRunning];
+    //            });
+    //        }]];
+    //
+    //        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+    //            [self.session startRunning];
+    //        }];
+    //
+    //        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceDidRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    //        self->deviceOrientation = [[UIDevice currentDevice] orientation];
+    //        [self updatePreviewLayerOrientation];
+    //    });
 }
 
 - (void)deviceDidRotate:(NSNotification *)notification
@@ -185,34 +186,34 @@ API_AVAILABLE(ios(10.0))
         return;
     }
     deviceOrientation = currentOrientation;
-    [self updatePreviewLayerOrientation];
+//    [self updatePreviewLayerOrientation];
 }
 
 // Function to rotate the previewLayer according to the device's orientation.
 - (void)updatePreviewLayerOrientation {
     //Get Preview Layer connection
-//    AVCaptureConnection *previewLayerConnection = self.previewLayer.connection;
-//    if ([previewLayerConnection isVideoOrientationSupported]) {
-//        switch(deviceOrientation) {
-//            case UIDeviceOrientationPortrait:
-//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-//                break;
-//            case UIDeviceOrientationPortraitUpsideDown:
-//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];
-//                break;
-//            case UIDeviceOrientationLandscapeLeft:
-//                // Not sure why I need to invert left and right, but this is what is needed for
-//                // it to function properly. Otherwise it reverses the image.
-//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
-//                break;
-//            case UIDeviceOrientationLandscapeRight:
-//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
-//                break;
-//            default:
-//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-//                
-//        }
-//    }
+    AVCaptureConnection *previewLayerConnection = self.previewLayer.connection;
+    if ([previewLayerConnection isVideoOrientationSupported]) {
+        switch(deviceOrientation) {
+            case UIDeviceOrientationPortrait:
+                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+                break;
+            case UIDeviceOrientationPortraitUpsideDown:
+                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];
+                break;
+            case UIDeviceOrientationLandscapeLeft:
+                // Not sure why I need to invert left and right, but this is what is needed for
+                // it to function properly. Otherwise it reverses the image.
+                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
+                break;
+            case UIDeviceOrientationLandscapeRight:
+                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+                break;
+            default:
+                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+
+        }
+    }
 }
 
 - (void)stopSession {
@@ -232,11 +233,11 @@ API_AVAILABLE(ios(10.0))
     for(AVCaptureInput *input in self.session.inputs) {
         [self.session removeInput:input];
     }
-        
+    
     for(AVCaptureOutput *output in self.session.outputs) {
         [self.session removeOutput:output];
     }
-        
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if ([[UIDevice currentDevice] isGeneratingDeviceOrientationNotifications]) {
         [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
@@ -245,11 +246,11 @@ API_AVAILABLE(ios(10.0))
 
 - (void)initializeCaptureSessionInput:(NSString *)type {
     TiThreadPerformOnMainThread(
-    ^() {
-      [self.session beginConfiguration];
-      
-      NSError *error = nil;
-      AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+                                ^() {
+        [self.session beginConfiguration];
+        
+        NSError *error = nil;
+        AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         
         if (![captureDevice lockForConfiguration:&error]) {
             NSLog(@"%@", error);
@@ -259,62 +260,62 @@ API_AVAILABLE(ios(10.0))
         [captureDevice unlockForConfiguration];
         
         self->zoomMax = captureDevice.activeFormat.videoMaxZoomFactor;
-      
-      if (captureDevice == nil) {
-          return;
-      }
-      
-      AVCaptureDeviceInput *captureDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
-      
-      if (error || captureDeviceInput == nil) {
-          NSLog(@"%@", error);
-          return;
-      }
-      
-      if (type == AVMediaTypeVideo) {
-          [self.session removeInput:self.videoCaptureDeviceInput];
-      }
-      
-      if ([self.session canAddInput:captureDeviceInput]) {
-          [self.session addInput:captureDeviceInput];
-          if (type == AVMediaTypeVideo) {
-              self.videoCaptureDeviceInput = captureDeviceInput;
-          }
-      }
-      
-      [self.session commitConfiguration];
+        
+        if (captureDevice == nil) {
+            return;
+        }
+        
+        AVCaptureDeviceInput *captureDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
+        
+        if (error || captureDeviceInput == nil) {
+            NSLog(@"%@", error);
+            return;
+        }
+        
+        if (type == AVMediaTypeVideo) {
+            [self.session removeInput:self.videoCaptureDeviceInput];
+        }
+        
+        if ([self.session canAddInput:captureDeviceInput]) {
+            [self.session addInput:captureDeviceInput];
+            if (type == AVMediaTypeVideo) {
+                self.videoCaptureDeviceInput = captureDeviceInput;
+            }
+        }
+        
+        [self.session commitConfiguration];
     },
-    NO);
-//    dispatch_async(self.sessionQueue, ^{
-//        [self.session beginConfiguration];
-//
-//        NSError *error = nil;
-//        AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-//
-//        if (captureDevice == nil) {
-//            return;
-//        }
-//
-//        AVCaptureDeviceInput *captureDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
-//
-//        if (error || captureDeviceInput == nil) {
-//            NSLog(@"%@", error);
-//            return;
-//        }
-//
-//        if (type == AVMediaTypeVideo) {
-//            [self.session removeInput:self.videoCaptureDeviceInput];
-//        }
-//
-//        if ([self.session canAddInput:captureDeviceInput]) {
-//            [self.session addInput:captureDeviceInput];
-//            if (type == AVMediaTypeVideo) {
-//                self.videoCaptureDeviceInput = captureDeviceInput;
-//            }
-//        }
-//
-//        [self.session commitConfiguration];
-//    });
+                                NO);
+    //    dispatch_async(self.sessionQueue, ^{
+    //        [self.session beginConfiguration];
+    //
+    //        NSError *error = nil;
+    //        AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    //
+    //        if (captureDevice == nil) {
+    //            return;
+    //        }
+    //
+    //        AVCaptureDeviceInput *captureDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
+    //
+    //        if (error || captureDeviceInput == nil) {
+    //            NSLog(@"%@", error);
+    //            return;
+    //        }
+    //
+    //        if (type == AVMediaTypeVideo) {
+    //            [self.session removeInput:self.videoCaptureDeviceInput];
+    //        }
+    //
+    //        if ([self.session canAddInput:captureDeviceInput]) {
+    //            [self.session addInput:captureDeviceInput];
+    //            if (type == AVMediaTypeVideo) {
+    //                self.videoCaptureDeviceInput = captureDeviceInput;
+    //            }
+    //        }
+    //
+    //        [self.session commitConfiguration];
+    //    });
 }
 
 - (void)subjectAreaDidChange:(NSNotification *)notification
@@ -326,7 +327,7 @@ API_AVAILABLE(ios(10.0))
 - (void)focusWithMode:(AVCaptureFocusMode)focusMode exposeWithMode:(AVCaptureExposureMode)exposureMode atDevicePoint:(CGPoint)point monitorSubjectAreaChange:(BOOL)monitorSubjectAreaChange
 {
     TiThreadPerformOnMainThread(
-    ^() {
+                                ^() {
         AVCaptureDevice *device = [[self videoCaptureDeviceInput] device];
         NSError *error = nil;
         if ([device lockForConfiguration:&error])
@@ -349,30 +350,30 @@ API_AVAILABLE(ios(10.0))
             NSLog(@"%@", error);
         }
     },
-    NO);
-//    dispatch_async([self sessionQueue], ^{
-//        AVCaptureDevice *device = [[self videoCaptureDeviceInput] device];
-//        NSError *error = nil;
-//        if ([device lockForConfiguration:&error])
-//        {
-//            if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:focusMode])
-//            {
-//                [device setFocusMode:focusMode];
-//                [device setFocusPointOfInterest:point];
-//            }
-//            if ([device isExposurePointOfInterestSupported] && [device isExposureModeSupported:exposureMode])
-//            {
-//                [device setExposureMode:exposureMode];
-//                [device setExposurePointOfInterest:point];
-//            }
-//            [device setSubjectAreaChangeMonitoringEnabled:monitorSubjectAreaChange];
-//            [device unlockForConfiguration];
-//        }
-//        else
-//        {
-//            NSLog(@"%@", error);
-//        }
-//    });
+                                NO);
+    //    dispatch_async([self sessionQueue], ^{
+    //        AVCaptureDevice *device = [[self videoCaptureDeviceInput] device];
+    //        NSError *error = nil;
+    //        if ([device lockForConfiguration:&error])
+    //        {
+    //            if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:focusMode])
+    //            {
+    //                [device setFocusMode:focusMode];
+    //                [device setFocusPointOfInterest:point];
+    //            }
+    //            if ([device isExposurePointOfInterestSupported] && [device isExposureModeSupported:exposureMode])
+    //            {
+    //                [device setExposureMode:exposureMode];
+    //                [device setExposurePointOfInterest:point];
+    //            }
+    //            [device setSubjectAreaChangeMonitoringEnabled:monitorSubjectAreaChange];
+    //            [device unlockForConfiguration];
+    //        }
+    //        else
+    //        {
+    //            NSLog(@"%@", error);
+    //        }
+    //    });
 }
 
 - (void)focusAtThePoint:(CGPoint) atPoint;
@@ -380,7 +381,7 @@ API_AVAILABLE(ios(10.0))
     Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
     if (captureDeviceClass != nil) {
         TiThreadPerformOnMainThread(
-        ^() {
+                                    ^() {
             AVCaptureDevice *device = [[self videoCaptureDeviceInput] device];
             if([device isFocusPointOfInterestSupported] &&
                [device isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
@@ -399,26 +400,26 @@ API_AVAILABLE(ios(10.0))
                 }
             }
         },
-        NO);
-//        dispatch_async([self sessionQueue], ^{
-//            AVCaptureDevice *device = [[self videoCaptureDeviceInput] device];
-//            if([device isFocusPointOfInterestSupported] &&
-//               [device isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
-//                CGRect screenRect = [[UIScreen mainScreen] bounds];
-//                double screenWidth = screenRect.size.width;
-//                double screenHeight = screenRect.size.height;
-//                double focus_x = atPoint.x/screenWidth;
-//                double focus_y = atPoint.y/screenHeight;
-//                if([device lockForConfiguration:nil]) {
-//                    [device setFocusPointOfInterest:CGPointMake(focus_x,focus_y)];
-//                    [device setFocusMode:AVCaptureFocusModeAutoFocus];
-//                    if ([device isExposureModeSupported:AVCaptureExposureModeAutoExpose]){
-//                        [device setExposureMode:AVCaptureExposureModeAutoExpose];
-//                    }
-//                    [device unlockForConfiguration];
-//                }
-//            }
-//        });
+                                    NO);
+        //        dispatch_async([self sessionQueue], ^{
+        //            AVCaptureDevice *device = [[self videoCaptureDeviceInput] device];
+        //            if([device isFocusPointOfInterestSupported] &&
+        //               [device isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
+        //                CGRect screenRect = [[UIScreen mainScreen] bounds];
+        //                double screenWidth = screenRect.size.width;
+        //                double screenHeight = screenRect.size.height;
+        //                double focus_x = atPoint.x/screenWidth;
+        //                double focus_y = atPoint.y/screenHeight;
+        //                if([device lockForConfiguration:nil]) {
+        //                    [device setFocusPointOfInterest:CGPointMake(focus_x,focus_y)];
+        //                    [device setFocusMode:AVCaptureFocusModeAutoFocus];
+        //                    if ([device isExposureModeSupported:AVCaptureExposureModeAutoExpose]){
+        //                        [device setExposureMode:AVCaptureExposureModeAutoExpose];
+        //                    }
+        //                    [device unlockForConfiguration];
+        //                }
+        //            }
+        //        });
     }
 }
 
@@ -514,10 +515,10 @@ API_AVAILABLE(ios(11.0)){
         NSData* compressedImage = [ComBduyngTiopenalprALPRCamera imageWithImage:imageData options:self.takePictureOptions];
         NSString *path = [ComBduyngTiopenalprALPRCamera generatePathInDirectory:[[ComBduyngTiopenalprALPRCamera cacheDirectoryPath] stringByAppendingPathComponent:@"Camera"] withExtension:@".jpg"];
         NSString *uri = [ComBduyngTiopenalprALPRCamera writeImage:compressedImage toPath:path];
-//        FIXME: self.takePictureResolve(uri);
+        //        FIXME: self.takePictureResolve(uri);
         
     } else {
-//        FIXME: self.takePictureReject(@"E_IMAGE_CAPTURE_FAILED", @"Image could not be captured", error);
+        //        FIXME: self.takePictureReject(@"E_IMAGE_CAPTURE_FAILED", @"Image could not be captured", error);
     }
 }
 
@@ -556,35 +557,35 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         }
         rot90(src, rotate);
         
-//        NSDate *date = [NSDate date];
+        //        NSDate *date = [NSDate date];
         
         [[PlateScanner sharedInstance] scanImage:src onSuccess:^(PlateResult *result) {
             if (result) {
                 if ([[self proxy] _hasListeners:@"plateRecognized"]) {
                     [[self proxy] fireEvent:@"plateRecognized" withObject:@{@"confidence": @(result.confidence), @"plate": result.plate}];
                 }
-//                self.camera.onPlateRecognized(@{
-//                    @"confidence": @(result.confidence),
-//                    @"plate": result.plate
-//                });
+                //                self.camera.onPlateRecognized(@{
+                //                    @"confidence": @(result.confidence),
+                //                    @"plate": result.plate
+                //                });
             }
             
             CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-//            NSLog(@"Time: %f", -[date timeIntervalSinceNow]);
+            //            NSLog(@"Time: %f", -[date timeIntervalSinceNow]);
             self.isProcessingFrame = NO;
             
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self.camera updatePlateBorder:result orientation:self->deviceOrientation];
-//            });
+            //            dispatch_async(dispatch_get_main_queue(), ^{
+            //                [self.camera updatePlateBorder:result orientation:self->deviceOrientation];
+            //            });
             
             TiThreadPerformOnMainThread(
-            ^() {
+                                        ^() {
                 [self.camera updatePlateBorder:result orientation:self->deviceOrientation];
             },
-            NO);
+                                        NO);
             
         } onFailure:^(NSError *err) {
-//            NSLog(@"Error: %@", err);
+            //            NSLog(@"Error: %@", err);
             CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
             self.isProcessingFrame = NO;
         }];
@@ -595,72 +596,72 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 - (void)updateContentMode
 {
-  if (self != nil) {
-    [self setContentMode:[self contentModeForSceneView]];
-  }
+    if (self != nil) {
+        [self setContentMode:[self contentModeForSceneView]];
+    }
 }
 
 - (UIViewContentMode)contentModeForSceneView
 {
-  if (TiDimensionIsAuto(width) || TiDimensionIsAutoSize(width) || TiDimensionIsUndefined(width) || TiDimensionIsAuto(height) || TiDimensionIsAutoSize(height) || TiDimensionIsUndefined(height)) {
-    return UIViewContentModeScaleAspectFit;
-  } else {
-    return UIViewContentModeScaleToFill;
-  }
+    if (TiDimensionIsAuto(width) || TiDimensionIsAutoSize(width) || TiDimensionIsUndefined(width) || TiDimensionIsAuto(height) || TiDimensionIsAutoSize(height) || TiDimensionIsUndefined(height)) {
+        return UIViewContentModeScaleAspectFit;
+    } else {
+        return UIViewContentModeScaleToFill;
+    }
 }
 
 - (void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
-  for (UIView *child in [[self camera] subviews]) {
-    [TiUtils setView:child positionRect:bounds];
-  }
-
-  [super frameSizeChanged:frame bounds:bounds];
+    for (UIView *child in [[self camera] subviews]) {
+        [TiUtils setView:child positionRect:bounds];
+    }
+    self.previewLayer.superlayer.frame = bounds;
+    [self.previewLayer.superlayer layoutSublayers];
 }
 
 - (CGFloat)contentWidthForWidth:(CGFloat)suggestedWidth
 {
-  if (autoWidth > 0) {
-    //If height is DIP returned a scaled autowidth to maintain aspect ratio
-    if (TiDimensionIsDip(height) && autoHeight > 0) {
-      return roundf(autoWidth * height.value / autoHeight);
+    if (autoWidth > 0) {
+        //If height is DIP returned a scaled autowidth to maintain aspect ratio
+        if (TiDimensionIsDip(height) && autoHeight > 0) {
+            return roundf(autoWidth * height.value / autoHeight);
+        }
+        return autoWidth;
     }
-    return autoWidth;
-  }
-
-  CGFloat calculatedWidth = TiDimensionCalculateValue(width, autoWidth);
-  if (calculatedWidth > 0) {
-    return calculatedWidth;
-  }
-
-  return 0;
+    
+    CGFloat calculatedWidth = TiDimensionCalculateValue(width, autoWidth);
+    if (calculatedWidth > 0) {
+        return calculatedWidth;
+    }
+    
+    return 0;
 }
 
 - (CGFloat)contentHeightForWidth:(CGFloat)width_
 {
-  if (width_ != autoWidth && autoWidth > 0 && autoHeight > 0) {
-    return (width_ * autoHeight / autoWidth);
-  }
-
-  if (autoHeight > 0) {
-    return autoHeight;
-  }
-
-  CGFloat calculatedHeight = TiDimensionCalculateValue(height, autoHeight);
-  if (calculatedHeight > 0) {
-    return calculatedHeight;
-  }
-
-  return 0;
+    if (width_ != autoWidth && autoWidth > 0 && autoHeight > 0) {
+        return (width_ * autoHeight / autoWidth);
+    }
+    
+    if (autoHeight > 0) {
+        return autoHeight;
+    }
+    
+    CGFloat calculatedHeight = TiDimensionCalculateValue(height, autoHeight);
+    if (calculatedHeight > 0) {
+        return calculatedHeight;
+    }
+    
+    return 0;
 }
 
 - (UIViewContentMode)contentMode
 {
-  if (TiDimensionIsAuto(width) || TiDimensionIsAutoSize(width) || TiDimensionIsUndefined(width) || TiDimensionIsAuto(height) || TiDimensionIsAutoSize(height) || TiDimensionIsUndefined(height)) {
-    return UIViewContentModeScaleAspectFit;
-  } else {
-    return UIViewContentModeScaleToFill;
-  }
+    if (TiDimensionIsAuto(width) || TiDimensionIsAutoSize(width) || TiDimensionIsUndefined(width) || TiDimensionIsAuto(height) || TiDimensionIsAutoSize(height) || TiDimensionIsUndefined(height)) {
+        return UIViewContentModeScaleAspectFit;
+    } else {
+        return UIViewContentModeScaleToFill;
+    }
 }
 
 #pragma mark UIPinchGestureRecognizer
@@ -681,11 +682,11 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             int msc = (int)(((zoomTo+0.001)*100))%100;
             zoomTo = (NSInteger)zoomTo + msc * 0.01;
             zoomTo = fmaxf(1, fminf(zoomTo, zoomMax));
-
+            
             if ( camDevice.videoZoomFactor != zoomTo )
             {
                 TiThreadPerformOnMainThread(
-                ^() {
+                                            ^() {
                     AVCaptureDevice *device = [self.videoCaptureDeviceInput device];
                     NSError *error = nil;
                     
@@ -696,7 +697,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                     [device setVideoZoomFactor:zoomTo];
                     [device unlockForConfiguration];
                 },
-                NO);
+                                            NO);
             }
         }break;
         default:
@@ -723,7 +724,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 - (void)setZoomFactor_:(id)args {
     TiThreadPerformOnMainThread(
-    ^() {
+                                ^() {
         CGFloat factor = [TiUtils floatValue:args];
         AVCaptureDevice *device = [self.videoCaptureDeviceInput device];
         NSError *error = nil;
@@ -735,7 +736,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         [device setVideoZoomFactor:factor];
         [device unlockForConfiguration];
     },
-    NO);
+                                NO);
 }
 
 
@@ -792,7 +793,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 - (void)setTorchMode_:(id)args {
     TiThreadPerformOnMainThread(
-    ^() {
+                                ^() {
         NSInteger torchMode = [TiUtils intValue:args];
         AVCaptureDevice *device = [self.videoCaptureDeviceInput device];
         NSError *error = nil;
@@ -805,7 +806,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         [device setTorchMode: (AVCaptureTorchMode)torchMode];
         [device unlockForConfiguration];
     },
-    NO);
+                                NO);
 }
 
 @end

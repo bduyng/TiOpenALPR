@@ -13,7 +13,7 @@ var tiopenalprWindow = Ti.UI.createWindow({
   titleAttributes: {
     color: '#fffffff',
   },
-  // orientationModes: [Ti.UI.LANDSCAPE_RIGHT],
+  orientationModes: [Ti.UI.LANDSCAPE_RIGHT],
 });
 var camera = TiOpenALPR.createALPRCamera({
   top: 0,
