@@ -119,10 +119,10 @@ API_AVAILABLE(ios(10.0))
           [self.session startRunning];
       }];
       
-//      [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-//      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceDidRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
-//      self->deviceOrientation = [[UIDevice currentDevice] orientation];
-//      [self updatePreviewLayerOrientation];
+      [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceDidRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
+      self->deviceOrientation = [[UIDevice currentDevice] orientation];
+      [self updatePreviewLayerOrientation];
     },
     NO);
 //    dispatch_async(self.sessionQueue, ^{
@@ -176,40 +176,43 @@ API_AVAILABLE(ios(10.0))
 //    });
 }
 
-//- (void)deviceDidRotate:(NSNotification *)notification
-//{
-//    UIDeviceOrientation currentOrientation = [[UIDevice currentDevice] orientation];
-//    
-//    // Ignore changes in device orientation if unknown, face up, or face down.
-//    if (!UIDeviceOrientationIsValidInterfaceOrientation(currentOrientation)) {
-//        return;
-//    }
-//    deviceOrientation = currentOrientation;
-//    [self updatePreviewLayerOrientation];
-//}
+- (void)deviceDidRotate:(NSNotification *)notification
+{
+    UIDeviceOrientation currentOrientation = [[UIDevice currentDevice] orientation];
+    
+    // Ignore changes in device orientation if unknown, face up, or face down.
+    if (!UIDeviceOrientationIsValidInterfaceOrientation(currentOrientation)) {
+        return;
+    }
+    deviceOrientation = currentOrientation;
+    [self updatePreviewLayerOrientation];
+}
 
 // Function to rotate the previewLayer according to the device's orientation.
 - (void)updatePreviewLayerOrientation {
     //Get Preview Layer connection
-    AVCaptureConnection *previewLayerConnection = self.previewLayer.connection;
-    if ([previewLayerConnection isVideoOrientationSupported]) {
-        switch(deviceOrientation) {
-            case UIDeviceOrientationPortrait:
-                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-                break;
-            case UIDeviceOrientationPortraitUpsideDown:
-                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];
-                break;
-            case UIDeviceOrientationLandscapeLeft:
-                // Not sure why I need to invert left and right, but this is what is needed for
-                // it to function properly. Otherwise it reverses the image.
-                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
-                break;
-            case UIDeviceOrientationLandscapeRight:
-                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
-                break;
-        }
-    }
+//    AVCaptureConnection *previewLayerConnection = self.previewLayer.connection;
+//    if ([previewLayerConnection isVideoOrientationSupported]) {
+//        switch(deviceOrientation) {
+//            case UIDeviceOrientationPortrait:
+//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+//                break;
+//            case UIDeviceOrientationPortraitUpsideDown:
+//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];
+//                break;
+//            case UIDeviceOrientationLandscapeLeft:
+//                // Not sure why I need to invert left and right, but this is what is needed for
+//                // it to function properly. Otherwise it reverses the image.
+//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
+//                break;
+//            case UIDeviceOrientationLandscapeRight:
+//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+//                break;
+//            default:
+//                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+//                
+//        }
+//    }
 }
 
 - (void)stopSession {
@@ -255,7 +258,7 @@ API_AVAILABLE(ios(10.0))
         [captureDevice setVideoZoomFactor:1.5];
         [captureDevice unlockForConfiguration];
         
-        zoomMax = captureDevice.activeFormat.videoMaxZoomFactor;
+        self->zoomMax = captureDevice.activeFormat.videoMaxZoomFactor;
       
       if (captureDevice == nil) {
           return;
