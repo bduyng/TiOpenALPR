@@ -20,7 +20,7 @@ var camera = TiOpenALPR.createALPRCamera({
   bottom: 0,
   left: 0,
   right: 0,
-  // country: 'eu',
+  country: 'eu',
   zoomFactor: 1.0,
   borderColor: '#FF0000',
 });
@@ -40,10 +40,21 @@ var camera = TiOpenALPR.createALPRCamera({
 // rotate: -90
 // });
 // camera2.transform = matrix;
-
+// tiopenalprWindow.addEventListener('open', function (e) {
+//   var currentOrientation = tiopenalprWindow.orientation;
+//   console.error('currentOrientation', currentOrientation);
+//   tiopenalprWindow.orientationModes = [currentOrientation];
+// });
 camera.addEventListener('plateRecognized', function (e) {
   console.error('plateRecognized:', e);
 });
 tiopenalprWindow.add(camera);
+
+var label = Ti.UI.createLabel({
+  text: 'START',
+  fontSize: 20,
+  color: 'white',
+});
+tiopenalprWindow.add(label);
 
 tiopenalprWindow.open();

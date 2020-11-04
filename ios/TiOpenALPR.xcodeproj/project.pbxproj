@@ -112,6 +112,7 @@
 		E139D0172518BFD70043F977 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E139D0192518BFF20043F977 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		E139D01B2518C0A80043F977 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		E1C938C625526EBE0039AE11 /* TitaniumKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TitaniumKit.xcframework; path = "../../../../Library/Application Support/Titanium/mobilesdk/osx/9.2.1.GA/iphone/Frameworks/TitaniumKit.xcframework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +156,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1C938C625526EBE0039AE11 /* TitaniumKit.xcframework */,
 				E139D01B2518C0A80043F977 /* AVFoundation.framework */,
 				E139D0192518BFF20043F977 /* CoreMedia.framework */,
 				E139D0172518BFD70043F977 /* AssetsLibrary.framework */,

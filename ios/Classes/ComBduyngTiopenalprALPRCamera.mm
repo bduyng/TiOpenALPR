@@ -5,6 +5,7 @@
 //  Created by Duy Bao Nguyen on 9/21/20.
 //
 
+#import "TiApp.h"
 #import "ComBduyngTiopenalprALPRCamera.h"
 #import "PlateScanner.h"
 
@@ -59,6 +60,7 @@ API_AVAILABLE(ios(10.0))
         
         // Add to super-view
         [self addSubview:_camera];
+        
     }
     
     return _camera;
@@ -120,9 +122,16 @@ API_AVAILABLE(ios(10.0))
             [self.session startRunning];
         }];
         
-        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceDidRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
+//        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceDidRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
         self->deviceOrientation = [[UIDevice currentDevice] orientation];
+        TiOrientationFlags orientationFlags = [[[TiApp app] controller] orientationFlags];
+        if (orientationFlags == TiOrientationLandscapeOnly) {
+            self->deviceOrientation = UIDeviceOrientationLandscapeLeft;
+        }
+        else if (orientationFlags == TiOrientationPortraitOnly) {
+            self->deviceOrientation = UIDeviceOrientationPortrait;
+        }
         [self updatePreviewLayerOrientation];
     },
                                 NO);
@@ -179,6 +188,7 @@ API_AVAILABLE(ios(10.0))
 
 - (void)deviceDidRotate:(NSNotification *)notification
 {
+    NSLog(@"deviceDidRotate");
     UIDeviceOrientation currentOrientation = [[UIDevice currentDevice] orientation];
     
     // Ignore changes in device orientation if unknown, face up, or face down.
@@ -186,31 +196,37 @@ API_AVAILABLE(ios(10.0))
         return;
     }
     deviceOrientation = currentOrientation;
-//    [self updatePreviewLayerOrientation];
+    [self updatePreviewLayerOrientation];
 }
 
 // Function to rotate the previewLayer according to the device's orientation.
 - (void)updatePreviewLayerOrientation {
-    //Get Preview Layer connection
+    NSLog(@"updatePreviewLayerOrientation");
+//    deviceOrientation = [[UIDevice currentDevice] orientation];
+//    Get Preview Layer connection
     AVCaptureConnection *previewLayerConnection = self.previewLayer.connection;
     if ([previewLayerConnection isVideoOrientationSupported]) {
         switch(deviceOrientation) {
             case UIDeviceOrientationPortrait:
-                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+                NSLog(@"AVCaptureVideoOrientationPortrait");
+                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
                 break;
             case UIDeviceOrientationPortraitUpsideDown:
                 [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];
                 break;
             case UIDeviceOrientationLandscapeLeft:
+                NSLog(@"UIDeviceOrientationLandscapeLeft");
                 // Not sure why I need to invert left and right, but this is what is needed for
                 // it to function properly. Otherwise it reverses the image.
                 [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
                 break;
             case UIDeviceOrientationLandscapeRight:
+                NSLog(@"UIDeviceOrientationLandscapeRight");
                 [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
                 break;
             default:
-                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+                NSLog(@"AVCaptureVideoOrientationPortrait default");
+                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
 
         }
     }
