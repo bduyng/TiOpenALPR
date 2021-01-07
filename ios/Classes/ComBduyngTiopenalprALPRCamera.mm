@@ -209,7 +209,7 @@ API_AVAILABLE(ios(10.0))
         switch(deviceOrientation) {
             case UIDeviceOrientationPortrait:
                 NSLog(@"AVCaptureVideoOrientationPortrait");
-                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
+                [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortrait];
                 break;
             case UIDeviceOrientationPortraitUpsideDown:
                 [previewLayerConnection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];

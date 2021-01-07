@@ -1,5 +1,10 @@
 var TiOpenALPR = require('com.bduyng.tiopenalpr');
 
+Ti.Gesture.addEventListener('orientationchange', function onOrientationChange(e) {
+  console.error('orientationchange', e.orientation);
+  tiopenalprWindow.orientationModes = [e.orientation];
+});
+
 var tiopenalprWindow = Ti.UI.createWindow({
   backgroundColor: 'white',
   top: 0,
@@ -13,7 +18,7 @@ var tiopenalprWindow = Ti.UI.createWindow({
   titleAttributes: {
     color: '#fffffff',
   },
-  orientationModes: [Ti.UI.LANDSCAPE_RIGHT],
+  // orientationModes: [Ti.UI.LANDSCAPE_RIGHT],
 });
 var camera = TiOpenALPR.createALPRCamera({
   top: 0,
@@ -51,6 +56,7 @@ camera.addEventListener('plateRecognized', function (e) {
 tiopenalprWindow.add(camera);
 
 var label = Ti.UI.createLabel({
+  bottom: 20,
   text: 'START',
   fontSize: 20,
   color: 'white',
